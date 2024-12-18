@@ -1,6 +1,10 @@
-from django.urls import path,include
-from .views import show_ad
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import AdViewSet
+
+router = DefaultRouter()
+router.register(r'ads', AdViewSet ,  basename='ad')
 
 urlpatterns = [
-    path('my_ad/', show_ad.as_view() , name='show_ad'),
+    path('api/', include(router.urls)),
 ]
