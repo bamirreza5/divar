@@ -7,8 +7,6 @@ from .Serializer import AdSerializer
 from .permissions import IsOwner
 from rest_framework import permissions
 
-
-
 # Create your views here.
 # class show_ad(View):
 #     def get(self,request):
@@ -26,3 +24,6 @@ class AdViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'create']:
             return [permissions.IsAuthenticated()]
         return [IsOwner()]
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
