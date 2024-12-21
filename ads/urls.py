@@ -7,4 +7,4 @@ router.register(r'ads', AdViewSet ,  basename='ad')
 
 urlpatterns = [
     path('api/', include(router.urls)),
-]
+] 

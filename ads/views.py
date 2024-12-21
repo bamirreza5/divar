@@ -24,6 +24,5 @@ class AdViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'create']:
             return [permissions.IsAuthenticated()]
         return [IsOwner()]
-    
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
