@@ -1,0 +1,9 @@
+{% if ads %}
+    <ul>
+        {% for ad in ads %}
+            <li>{{ ad.title }} - {{ ad.description }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>هیچ آگهی‌ای وجود ندارد.</p>
+{% endif %}

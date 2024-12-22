@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class Ad(models.Model):
     title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='image/', default='default_image.jpg')   
+    image = models.ImageField(upload_to='image/', default='default_image.jpg',blank=False)   
     description = models.TextField()
     price = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
     contact_number = PhoneNumberField()
