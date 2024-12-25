@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.views import View
 from rest_framework import viewsets
 from .models import Ad
-from .Serializer import AdSerializer
+from .Serializer import AdSerializer,CategorySerializer, CitySerializer
 from .permissions import IsOwner
 from rest_framework import permissions
+from ads.models import Category, City
 
 # Create your views here.
 # class show_ad(View):
@@ -26,3 +27,11 @@ class AdViewSet(viewsets.ModelViewSet):
         return [IsOwner()]
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CityViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer

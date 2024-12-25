@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Ad
+from ads.models import Category, City
 
 # class AdSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -14,3 +15,11 @@ class AdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ad
         fields = '__all__'
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = ['id', 'name']
