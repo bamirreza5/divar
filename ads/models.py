@@ -11,8 +11,10 @@ class City(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='categories')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.name} ({self.city.name})"
+
     
 class Ad(models.Model):
     title = models.CharField(max_length=200)

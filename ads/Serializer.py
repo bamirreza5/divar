@@ -14,7 +14,6 @@ from .models import Ad, Category, City
 
 class AdSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
-
     class Meta:
         model = Ad
         fields = '__all__'
@@ -22,11 +21,10 @@ class AdSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'city']
+        fields = ['id', 'name', 'city','user']
 
 class CitySerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True, read_only=True)
-
     class Meta:
         model = City
-        fields = ['id', 'name', 'categories']
+        fields = '__all__'
