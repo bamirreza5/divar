@@ -14,23 +14,27 @@ from ads.models import Category, City
 #         return HttpResponse("ok")
 
 class AdViewSet(viewsets.ModelViewSet):
-    #اگر خواستیم همه رو بگیریم
-    # queryset = Ad.objects.all()
     serializer_class = AdSerializer
 
     def get_queryset(self):
         return Ad.objects.filter(user=self.request.user)
-    def get_permissions(self):
 
+    def get_permissions(self):
         if self.action in ['list', 'create']:
             return [permissions.IsAuthenticated()]
         return [IsOwner()]
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        city_id = self.request.query_params.get('city', None)
+        if city_id:
+            return Category.objects.filter(city_id=city_id)
+        return Category.objects.all()
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = City.objects.all()
