@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
+from django.conf import settings
+
 
 class City(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -11,7 +13,8 @@ class City(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='categories')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.name} ({self.city.name})"
 
@@ -26,7 +29,7 @@ class Ad(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='ads')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

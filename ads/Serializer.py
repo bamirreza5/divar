@@ -21,7 +21,7 @@ class AdSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'city','user']
+        fields = ['id', 'name', 'city']
 
 class CitySerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True, read_only=True)
